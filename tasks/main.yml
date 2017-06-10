@@ -4,15 +4,18 @@
   with_items:
     - postfix
     - mailutils
+  become: true
 
 - template:
-    src: ../templates/etc/postfix/main.cf.j2
-    dest: /etc/postfix/main.cf
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
+   src: ../templates/etc/postfix/main.cf.j2
+   dest: /etc/postfix/main.cf
+   owner: root
+   group: root
+   mode: 0644
+   backup: yes
+  become: true
 
 
 - name: POSTFIX ROLE | Ensure postfix is restarted
   action: service name=postfix state=restarted
+  become: true
